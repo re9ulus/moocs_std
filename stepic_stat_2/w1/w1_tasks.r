@@ -34,3 +34,10 @@ most_significant <- function(df) {
 # test_data <- read.csv("https://stepic.org/media/attachments/course/524/test_data.csv", stringsAsFactors = F)
 # most_significant(test_data)
 
+
+
+# Task 5, Done
+means <- apply(iris[, 1:4], 2, mean)
+iris$important_cases <- as.factor(ifelse((iris[, 1] > means[1]) + (iris[, 2] > means[2]) + (iris[, 3] > means[3]) + (iris[, 4] > means[4]) >= 3, "Yes", "No"))
+
+# Task 6
