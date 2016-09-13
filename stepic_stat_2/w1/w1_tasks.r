@@ -23,3 +23,14 @@ smart_test <- function(df) {
 # smart_test(mtcars[,c("am", "vs")])
 # 0.3475355 1.0000000 0.5555115 
 
+
+# Task 4, Done
+most_significant <- function(df) {
+  p.values <- apply(df, 2, function(x) chisq.test(table(x))$p.value)
+  min.p.value <- min(p.values)
+  colnames(df)[p.values == min.p.value]
+}
+
+# test_data <- read.csv("https://stepic.org/media/attachments/course/524/test_data.csv", stringsAsFactors = F)
+# most_significant(test_data)
+
