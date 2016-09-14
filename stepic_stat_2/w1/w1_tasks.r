@@ -35,9 +35,21 @@ most_significant <- function(df) {
 # most_significant(test_data)
 
 
-
 # Task 5, Done
 means <- apply(iris[, 1:4], 2, mean)
 iris$important_cases <- as.factor(ifelse((iris[, 1] > means[1]) + (iris[, 2] > means[2]) + (iris[, 3] > means[3]) + (iris[, 4] > means[4]) >= 3, "Yes", "No"))
 
+
 # Task 6
+get_important_cases <- function(df) {
+  means <- apply(df, 2, mean)
+  important.items <- as.integer(df[, 1] > means[1])
+  for(i in 2:length(means)) {
+    important.items <- important.items + as.integer(df[, i] > means[i])
+  }
+  print(important.items)
+  df$important_cases <- factor(ifelse((important.items >= (length(means) %/% 2 + 1)), "Yes", "No"), levels=c("Yes", "No"))
+  df
+}
+
+
