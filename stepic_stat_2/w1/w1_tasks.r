@@ -53,3 +53,11 @@ get_important_cases <- function(df) {
 }
 
 
+# Task 7
+stat_mode <- function(v) {
+  t <- table(v)
+  max_val <- max(t)
+  as.integer(names(t)[which(t == max_val)])
+}
+
+
