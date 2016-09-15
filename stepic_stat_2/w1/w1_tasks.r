@@ -1,3 +1,5 @@
+# Stepic, statistics 2, week1 tasks
+
 # Task 2, Done
 NA_position <- function(x, y) {
   all(is.na(x) == is.na(y))
@@ -40,7 +42,7 @@ means <- apply(iris[, 1:4], 2, mean)
 iris$important_cases <- as.factor(ifelse((iris[, 1] > means[1]) + (iris[, 2] > means[2]) + (iris[, 3] > means[3]) + (iris[, 4] > means[4]) >= 3, "Yes", "No"))
 
 
-# Task 6
+# Task 6, Done
 get_important_cases <- function(df) {
   means <- apply(df, 2, mean)
   important.items <- as.integer(df[, 1] > means[1])
@@ -53,7 +55,7 @@ get_important_cases <- function(df) {
 }
 
 
-# Task 7
+# Task 7, Done
 stat_mode <- function(v) {
   t <- table(v)
   max_val <- max(t)
@@ -61,3 +63,45 @@ stat_mode <- function(v) {
 }
 
 
+# Task 8, Done
+?chisq.test
+
+max_resid <- function(df) {
+  t <- chisq.test(table(df))$stdres
+  max_val <- max(t)
+  
+  found = FALSE
+  target_row = 0
+  target_col = 0
+  for(row in 1:nrow(t)) {
+    for(col in 1:ncol(t)) {
+      if (t[row, col] == max_val) {
+        target_row = row
+        target_col = col
+        found = TRUE
+        break
+      }    
+    }
+    if (found) {
+      break
+    }
+  }
+  
+  c(rownames(t)[target_row], colnames(t)[target_col])
+}
+
+# Accurate solution
+max_resid <- function(test_data){    
+  d <- table(test_data)    
+  chi <- chisq.test(d)    
+  ind <- which(chi$stdres==max(chi$stdres), arr.ind = T)    
+  return(c(row.names(d)[ind[1]],colnames(d)[ind[2]]))    
+}
+
+test_data <- read.csv("https://stepic.org/media/attachments/course/524/test_drugs.csv")
+
+
+# Task 9, Done
+library("ggplot2")
+ggplot(diamonds, aes(x=color, fill=cut)) +
+  geom_bar(position='dodge')
