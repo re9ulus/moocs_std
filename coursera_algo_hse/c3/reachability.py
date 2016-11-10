@@ -2,9 +2,20 @@
 
 import sys
 
+visited = set()
+
 def reach(adj, x, y):
     #write your code here
-    return 0
+    visited.add(x)
+    if x == y:
+        return 1
+    resp = 0
+    for node in adj[x]:
+        if node not in visited:
+            resp |= reach(adj, node, y)
+        if resp:
+            break
+    return resp
 
 if __name__ == '__main__':
     input = sys.stdin.read()
