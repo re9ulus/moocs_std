@@ -1,11 +1,33 @@
 #Uses python3
 
 import sys
-import queue
+from queue import Queue
+
+
+inf = float('inf')
+
+
+def bfs(adj, s, t):
+    q = Queue()
+    dist = [inf for i in range(len(adj))]
+    dist[s] = 0
+    q.put(s)
+    while not q.empty():
+        curr = q.get()
+        for node in adj[curr]:
+            if dist[node] != inf:
+                continue
+            dist[node] = dist[curr] + 1
+            if node == t:
+                return dist[node]
+            q.put(node)
+    return -1
+
 
 def distance(adj, s, t):
     #write your code here
-    return -1
+    return bfs(adj, s, t)
+
 
 if __name__ == '__main__':
     input = sys.stdin.read()
