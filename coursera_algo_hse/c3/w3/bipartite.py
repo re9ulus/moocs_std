@@ -1,11 +1,26 @@
 #Uses python3
 
 import sys
-import queue
+from queue import Queue
+
 
 def bipartite(adj):
     #write your code here
-    return -1
+    q = Queue()
+    q.put(0)
+    colors = [-1 for i in range(len(adj))]
+    colors[0] = 0
+    while not q.empty():
+        curr = q.get()
+        for node in adj[curr]:
+            if colors[node] == colors[curr]:
+                return 0
+            elif colors[node] != -1:
+                continue
+            colors[node] = not colors[curr]
+            q.put(node)
+    return 1
+
 
 if __name__ == '__main__':
     input = sys.stdin.read()
