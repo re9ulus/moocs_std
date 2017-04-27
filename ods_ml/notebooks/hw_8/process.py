@@ -51,10 +51,10 @@ def split_train_test(filename):
     ind = 0
     train_file = open('stackoverflow_train.vw', 'w+')
     test_file = open('stackoverflow_test.vw', 'w+')
-    valid_file = open(' stackoverflow_valid.vw', 'w+')
+    valid_file = open('stackoverflow_valid.vw', 'w+')
     train_labels = open('stackoverflow_train.txt', 'w+')
     test_labels = open('stackoverflow_test.txt', 'w+')
-    valid_labels = open(' stackoverflow_valid.txt', 'w+')
+    valid_labels = open('stackoverflow_valid.txt', 'w+')
 
     with open(filename, 'r') as file_from:
         for line in file_from:
